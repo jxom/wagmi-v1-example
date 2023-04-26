@@ -11,9 +11,10 @@ export function NetworkSwitcher() {
         Connected to {chain?.name ?? chain?.id}
         {chain?.unsupported && ' (unsupported)'}
       </div>
-
+      <br />
       {switchNetwork && (
         <div>
+          Switch to:{' '} 
           {chains.map((x) =>
             x.id === chain?.id ? null : (
               <button key={x.id} onClick={() => switchNetwork(x.id)}>
@@ -25,7 +26,7 @@ export function NetworkSwitcher() {
         </div>
       )}
 
-      <div>{error && error.message}</div>
+      <div>{error?.message}</div>
     </div>
   )
 }

@@ -3,11 +3,11 @@ import { goerli, mainnet } from 'wagmi/chains'
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
-import { WalletConnectLegacyConnector } from 'wagmi/connectors/walletConnectLegacy'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 import { publicProvider } from 'wagmi/providers/public'
 
-const { chains, provider, webSocketProvider } = configureChains(
+const { chains, publicClient, webSocketPublicClient } = configureChains(
   [mainnet, ...(process.env.NODE_ENV === 'development' ? [goerli] : [])],
   [
     publicProvider(),
@@ -24,10 +24,10 @@ export const client = createClient({
         appName: 'wagmi',
       },
     }),
-    new WalletConnectLegacyConnector({
+    new WalletConnectConnector({
       chains,
       options: {
-        qrcode: true,
+        projectId: '2d8155e8754dd573bb58a45c3f4ec083'
       },
     }),
     new InjectedConnector({
@@ -38,6 +38,6 @@ export const client = createClient({
       },
     }),
   ],
-  provider,
-  webSocketProvider,
+  publicClient,
+  webSocketPublicClient,
 })
