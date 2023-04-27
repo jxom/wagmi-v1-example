@@ -8,7 +8,7 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { publicProvider } from 'wagmi/providers/public'
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [mainnet, ...(process.env.NODE_ENV === 'development' ? [goerli] : [])],
+  [goerli, mainnet],
   [
     publicProvider(),
   ],
